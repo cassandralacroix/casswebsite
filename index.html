@@ -68,6 +68,29 @@
       transition: opacity 0.2s;
     }
     nav a:hover { opacity: 0.5; }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: var(--ink);
+      cursor: pointer;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+      padding: 0;
+    }
+    .lang-toggle button.active { opacity: 1; }
+    .lang-toggle button:hover { opacity: 1; }
+    .lang-toggle span { color: var(--muted); }
 
     /* Hero */
     .hero {
@@ -419,17 +442,22 @@
   <nav>
     <div class="logo">Cassandra Lacroix</div>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#commissions">Clients</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="#commissions" data-i18n="nav.clients">Clients</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li class="lang-toggle" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <span>/</span>
+        <button type="button" data-lang="fr">FR</button>
+      </li>
     </ul>
   </nav>
 
   <header class="hero">
-    <div class="eyebrow">Photographer · Montréal</div>
-    <h1>Finding beauty<br /><em>in everything</em></h1>
-    <p class="tagline">Music, portrait, travel and lifestyle photography. Over fifteen years of capturing stories — still searching for the next one.</p>
+    <div class="eyebrow" data-i18n="hero.eyebrow">Photographer · Montréal</div>
+    <h1 data-i18n-html="hero.title">Finding beauty<br /><em>in everything</em></h1>
+    <p class="tagline" data-i18n="hero.tagline">Music, portrait, travel and lifestyle photography. Over fifteen years of capturing stories — still searching for the next one.</p>
   </header>
 
   <!-- Wave divider after hero -->
@@ -443,13 +471,13 @@
 
   <section id="about">
     <div class="container">
-      <div class="section-label">About</div>
+      <div class="section-label" data-i18n="about.label">About</div>
       <div class="about-grid">
-        <h2>Hi, I'm<br /><em>Cassandra Lacroix.</em></h2>
+        <h2 data-i18n-html="about.h2">Hi, I'm<br /><em>Cassandra Lacroix.</em></h2>
         <div class="about-text">
-          <p>Born in the eastern townships of Quebec, I now call Montreal my home. I've been doing photography for over 15 years now, shooting a mix of music, portrait, landscape and lifestyle. It's not easy to define my style — I'm still trying to find my niche after all this time.</p>
-          <p>I like to find beauty in everything around me; this is what drew me to photography. Whether it is shooting at a show, capturing memories during a trip or highlighting the authenticity of a person, I always find a joy in it.</p>
-          <p>I love listening to people's stories, pretending to be a barista and listening to music.</p>
+          <p data-i18n="about.p1">Born in the eastern townships of Quebec, I now call Montreal home. For over 15 years, I've been shooting music, portraits, landscapes, and lifestyle work — and rather than boxing myself into a single niche, I've built a practice that thrives on range.</p>
+          <p data-i18n="about.p2">I'm drawn to photography because I see beauty everywhere. Whether I'm working a show, documenting a trip, or capturing the authenticity of a person, I bring the same energy and eye to every frame.</p>
+          <p data-i18n="about.p3">Off camera, I love hearing people's stories, playing barista, and getting lost in music.</p>
         </div>
       </div>
     </div>
@@ -457,25 +485,25 @@
 
   <section id="work">
     <div class="container">
-      <div class="section-label">Work</div>
-      <h2>Selected <em>frames.</em></h2>
+      <div class="section-label" data-i18n="work.label">Work</div>
+      <h2 data-i18n-html="work.h2">Selected <em>frames.</em></h2>
 
       <div class="categories">
         <div class="category" data-category="travel">
           <img src="images/travel.jpg" alt="Travel" loading="lazy" />
-          <span class="label">Travel</span>
+          <span class="label" data-i18n="cat.travel">Travel</span>
         </div>
         <div class="category" data-category="music">
           <img src="images/music.jpg" alt="Music" loading="lazy" />
-          <span class="label">Music</span>
+          <span class="label" data-i18n="cat.music">Music</span>
         </div>
         <div class="category" data-category="portraits">
           <img src="images/portraits.jpg" alt="Portraits" loading="lazy" />
-          <span class="label">Portraits</span>
+          <span class="label" data-i18n="cat.portraits">Portraits</span>
         </div>
         <div class="category" data-category="brands">
           <img src="images/brands.jpg" alt="Brands" loading="lazy" />
-          <span class="label">Brands</span>
+          <span class="label" data-i18n="cat.brands">Brands</span>
         </div>
       </div>
 
@@ -501,8 +529,8 @@
 
   <section id="commissions">
     <div class="container">
-      <div class="section-label">Commissions</div>
-      <h2>Trusted <em>by.</em></h2>
+      <div class="section-label" data-i18n="comm.label">Commissions</div>
+      <h2 data-i18n-html="comm.h2">Trusted <em>by.</em></h2>
       <div class="commissions-list">
         <span>Out of The</span><span class="sep">/</span>
         <span>Cass Cafe</span><span class="sep">/</span>
@@ -510,17 +538,18 @@
         <span>Slow Tide</span><span class="sep">/</span>
         <span>Ciao Tote</span><span class="sep">/</span>
         <span>V de V</span><span class="sep">/</span>
-        <span>Corsé Magazine</span>
+        <span>Corsé Magazine</span><span class="sep">/</span>
+        <span>Cookine</span>
       </div>
     </div>
   </section>
 
   <section id="contact" class="contact">
-    <div class="section-label">Contact</div>
-    <h2>Let's make <em>something.</em></h2>
+    <div class="section-label" data-i18n="contact.label">Contact</div>
+    <h2 data-i18n-html="contact.h2">Let's make <em>something.</em></h2>
     <a href="mailto:cthecross@hotmail.ca">cthecross@hotmail.ca</a>
     <div class="socials">
-      <a href="https://www.instagram.com/cassandra.lacroix/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/cassandra.lacroix/" target="_blank" rel="noopener" data-i18n="social.instagram">Instagram</a>
     </div>
   </section>
 
@@ -544,11 +573,70 @@
 
   <script>
     const galleries = {
-      travel:    { title: 'Travel',    count: 12 },
-      music:     { title: 'Music',     count: 12 },
-      portraits: { title: 'Portraits', count: 12 },
-      brands:    { title: 'Brands',    count: 18 },
+      travel:    { count: 21 },
+      music:     { count: 13 },
+      portraits: { count: 22 },
+      brands:    { count: 45 },
     };
+
+    const i18n = {
+      en: {
+        title: 'Cassandra Lacroix — Photographer | Montreal',
+        description: 'Cassandra Lacroix, photographer based in Montreal. Music, portrait, travel, and brand photography.',
+        'nav.about': 'About',
+        'nav.work': 'Work',
+        'nav.clients': 'Clients',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'Photographer · Montréal',
+        'hero.title': 'Finding beauty<br /><em>in everything</em>',
+        'hero.tagline': 'Music, portrait, travel and lifestyle photography. Over fifteen years of capturing stories — still searching for the next one.',
+        'about.label': 'About',
+        'about.h2': "Hi, I'm<br /><em>Cassandra Lacroix.</em>",
+        'about.p1': "Born in the eastern townships of Quebec, I now call Montreal home. For over 15 years, I've been shooting music, portraits, landscapes, and lifestyle work — and rather than boxing myself into a single niche, I've built a practice that thrives on range.",
+        'about.p2': "I'm drawn to photography because I see beauty everywhere. Whether I'm working a show, documenting a trip, or capturing the authenticity of a person, I bring the same energy and eye to every frame.",
+        'about.p3': "Off camera, I love hearing people's stories, playing barista, and getting lost in music.",
+        'work.label': 'Work',
+        'work.h2': 'Selected <em>frames.</em>',
+        'cat.travel': 'Travel',
+        'cat.music': 'Music',
+        'cat.portraits': 'Portraits',
+        'cat.brands': 'Brands',
+        'comm.label': 'Commissions',
+        'comm.h2': 'Trusted <em>by.</em>',
+        'contact.label': 'Contact',
+        'contact.h2': "Let's make <em>something.</em>",
+        'social.instagram': 'Instagram',
+      },
+      fr: {
+        title: 'Cassandra Lacroix — Photographe | Montréal',
+        description: 'Cassandra Lacroix, photographe basée à Montréal. Photographie musicale, de portrait, de voyage et de marque.',
+        'nav.about': 'À propos',
+        'nav.work': 'Travaux',
+        'nav.clients': 'Clients',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'Photographe · Montréal',
+        'hero.title': 'Trouver la beauté<br /><em>dans tout.</em>',
+        'hero.tagline': 'Photographie musicale, de portrait, de voyage et de style de vie. Plus de quinze ans à capturer des histoires — toujours à la recherche de la prochaine.',
+        'about.label': 'À propos',
+        'about.h2': 'Bonjour, je suis<br /><em>Cassandra Lacroix.</em>',
+        'about.p1': 'Né dans les Cantons-de-l’Est du Québec, j’habite maintenant à Montréal. Depuis plus de 15 ans, je photographie la musique, les portraits, les paysages et le lifestyle. Plutôt que de me limiter à une seule niche, j’ai développé une pratique qui s’épanouit dans la diversité.',
+        'about.p2': 'Je suis attiré par la photographie parce que je vois de la beauté partout. Que je couvre un spectacle, documente un voyage ou capture l’authenticité d’une personne, j’apporte la même énergie et le même regard à chaque image.',
+        'about.p3': "Hors caméra, j'aime écouter les histoires des gens, jouer à la barista et me perdre dans la musique.",
+        'work.label': 'Travaux',
+        'work.h2': "Sélection d'<em>images.</em>",
+        'cat.travel': 'Voyage',
+        'cat.music': 'Musique',
+        'cat.portraits': 'Portraits',
+        'cat.brands': 'Marques',
+        'comm.label': 'Mandats',
+        'comm.h2': "Ils m'ont fait <em>confiance.</em>",
+        'contact.label': 'Contact',
+        'contact.h2': 'Créons <em>ensemble.</em>',
+        'social.instagram': 'Instagram',
+      },
+    };
+
+    let currentLang = 'en';
 
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
@@ -560,14 +648,17 @@
     function openCategory(cat) {
       const g = galleries[cat];
       if (!g) return;
-      modalTitle.textContent = g.title;
+      const dict = i18n[currentLang] || i18n.en;
+      const title = dict['cat.' + cat] || cat;
+      modal.dataset.category = cat;
+      modalTitle.textContent = title;
       modalGrid.innerHTML = '';
       for (let i = 1; i <= g.count; i++) {
         const num = String(i).padStart(2, '0');
         const src = `images/${cat}/${num}.jpg`;
         const img = document.createElement('img');
         img.src = src;
-        img.alt = `${g.title} ${i}`;
+        img.alt = `${title} ${i}`;
         img.loading = 'lazy';
         img.addEventListener('click', () => openViewer(src));
         modalGrid.appendChild(img);
@@ -602,6 +693,44 @@
         else if (modal.classList.contains('open')) closeModal();
       }
     });
+
+    function applyLang(lang) {
+      const dict = i18n[lang] || i18n.en;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = dict.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', dict.description);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key] != null) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      if (modal.classList.contains('open') && modal.dataset.category) {
+        const cat = modal.dataset.category;
+        if (dict['cat.' + cat]) modalTitle.textContent = dict['cat.' + cat];
+      }
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+
+    (function initLang() {
+      let lang;
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (!lang) {
+        lang = (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+      }
+      applyLang(lang);
+    })();
   </script>
 
 </body>
