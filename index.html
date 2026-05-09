@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cassandra Lacroix — Photographer | Montreal</title>
+  <meta name="description" content="Cassandra Lacroix, photographer based in Montreal. Music, portrait, travel, and brand photography." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --line: #d9d6cf;
+      --accent: #1a1a1a;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* Layout */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 24px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(245, 243, 238, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+    }
+    nav .logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    nav a:hover { opacity: 0.5; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 140px 32px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    /* Wave divider (after hero) */
+    .wave-divider {
+      width: 100%;
+      padding: 0;
+      margin: 0 0 -60px;
+      overflow: hidden;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+      height: 120px;
+    }
+    .wave-divider path {
+      fill: none;
+      stroke: var(--ink);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+      animation: drawWave 3s cubic-bezier(0.65, 0, 0.35, 1) forwards,
+                 floatWave 7s ease-in-out infinite;
+    }
+    .wave-divider path:nth-child(1) {
+      stroke-width: 4;
+      animation-delay: 0s, 3s;
+      opacity: 1;
+    }
+    .wave-divider path:nth-child(2) {
+      stroke-width: 2.5;
+      animation-delay: 0.4s, 3.4s;
+      opacity: 0.55;
+    }
+    .wave-divider path:nth-child(3) {
+      stroke-width: 1.5;
+      animation-delay: 0.8s, 3.8s;
+      opacity: 0.3;
+    }
+
+    @keyframes drawWave {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes floatWave {
+      0%, 100% { transform: translateY(0) scaleY(1); }
+      50%      { transform: translateY(-10px) scaleY(1.04); }
+    }
+
+    /* Hero content above waves, with fade-in */
+    .hero > * { position: relative; z-index: 1; }
+    .hero .eyebrow,
+    .hero h1,
+    .hero .tagline {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+    .hero .eyebrow { animation-delay: 0.2s; }
+    .hero h1      { animation-delay: 0.5s; }
+    .hero .tagline { animation-delay: 1.1s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wave-divider path,
+      .hero .eyebrow,
+      .hero h1,
+      .hero .tagline {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .hero .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(56px, 10vw, 140px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .hero .tagline {
+      font-size: 18px;
+      max-width: 540px;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section { padding: 120px 0; }
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      color: #2a2a2a;
+    }
+    .about-text p:last-child { color: var(--muted); font-style: italic; }
+
+    /* Categories */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .category {
+      aspect-ratio: 3/4;
+      background: #ddd;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .category img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .category:hover img { transform: scale(1.05); }
+    .category .label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      color: white;
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .gallery .item {
+      overflow: hidden;
+      background: #ddd;
+    }
+    .gallery .item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery .item:hover img { transform: scale(1.05); }
+    .gallery .tall { grid-row: span 2; aspect-ratio: 3/5; }
+    .gallery .item:not(.tall) { aspect-ratio: 4/5; }
+
+    /* Commissions */
+    .commissions-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.3;
+    }
+    .commissions-list span {
+      transition: opacity 0.2s;
+    }
+    .commissions-list span:hover { opacity: 0.5; }
+    .commissions-list .sep { color: var(--line); }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+      padding: 160px 0;
+      border-top: 1px solid var(--line);
+    }
+    .contact h2 { margin-bottom: 32px; }
+    .contact a {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+      transition: border-color 0.2s;
+    }
+    .contact a:hover { border-color: var(--ink); }
+    .contact .socials {
+      margin-top: 48px;
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .contact .socials a {
+      font-family: var(--sans);
+      font-size: 13px;
+      border: none;
+      color: var(--muted);
+    }
+    .contact .socials a:hover { color: var(--ink); }
+
+    /* Footer */
+    footer {
+      padding: 32px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    /* Modal / Lightbox */
+    .modal {
+      position: fixed; inset: 0;
+      background: rgba(20, 20, 20, 0.96);
+      z-index: 1000;
+      display: none;
+      overflow-y: auto;
+    }
+    .modal.open { display: block; }
+    .modal-header {
+      position: sticky; top: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 32px;
+      background: rgba(20, 20, 20, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: #f5f3ee;
+      font-weight: 300;
+    }
+    .modal-close {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #f5f3ee;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.1); }
+    .modal-grid {
+      column-count: 3;
+      column-gap: 16px;
+      padding: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .modal-grid img {
+      width: 100%;
+      margin-bottom: 16px;
+      break-inside: avoid;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+    .modal-grid img:hover { opacity: 0.85; }
+
+    /* Image viewer (full-screen single image) */
+    .viewer {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 2000;
+      cursor: zoom-out;
+      padding: 40px;
+    }
+    .viewer.open { display: flex; }
+    .viewer img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      nav ul { gap: 16px; }
+      nav a { font-size: 11px; }
+      .container, .hero { padding-left: 20px; padding-right: 20px; }
+      .hero { padding-top: 100px; }
+      section { padding: 80px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .categories { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .gallery .tall { grid-row: span 1; aspect-ratio: 4/5; }
+      .modal-grid { column-count: 2; column-gap: 8px; padding: 16px; }
+      .modal-grid img { margin-bottom: 8px; }
+      .modal-header { padding: 16px 20px; }
+      .modal-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Cassandra Lacroix</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#commissions">Clients</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Photographer · Montréal</div>
+    <h1>Finding beauty<br /><em>in everything</em></h1>
+    <p class="tagline">Music, portrait, travel and lifestyle photography. Over fifteen years of capturing stories — still searching for the next one.</p>
+  </header>
+
+  <!-- Wave divider after hero -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+      <path d="M0,160 C200,60 400,260 600,160 C800,60 1000,260 1200,160" />
+      <path d="M0,180 C200,80 400,280 600,180 C800,80 1000,280 1200,180" />
+      <path d="M0,200 C200,100 400,300 600,200 C800,100 1000,300 1200,200" />
+    </svg>
+  </div>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <div class="about-grid">
+        <h2>Hi, I'm<br /><em>Cassandra Lacroix.</em></h2>
+        <div class="about-text">
+          <p>Born in the eastern townships of Quebec, I now call Montreal my home. I've been doing photography for over 15 years now, shooting a mix of music, portrait, landscape and lifestyle. It's not easy to define my style — I'm still trying to find my niche after all this time.</p>
+          <p>I like to find beauty in everything around me; this is what drew me to photography. Whether it is shooting at a show, capturing memories during a trip or highlighting the authenticity of a person, I always find a joy in it.</p>
+          <p>I love listening to people's stories, pretending to be a barista and listening to music.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="container">
+      <div class="section-label">Work</div>
+      <h2>Selected <em>frames.</em></h2>
+
+      <div class="categories">
+        <div class="category" data-category="travel">
+          <img src="images/travel.jpg" alt="Travel" loading="lazy" />
+          <span class="label">Travel</span>
+        </div>
+        <div class="category" data-category="music">
+          <img src="images/music.jpg" alt="Music" loading="lazy" />
+          <span class="label">Music</span>
+        </div>
+        <div class="category" data-category="portraits">
+          <img src="images/portraits.jpg" alt="Portraits" loading="lazy" />
+          <span class="label">Portraits</span>
+        </div>
+        <div class="category" data-category="brands">
+          <img src="images/brands.jpg" alt="Brands" loading="lazy" />
+          <span class="label">Brands</span>
+        </div>
+      </div>
+
+      <div class="gallery" style="margin-top: 80px;">
+        <div class="item tall">
+          <img src="images/g1.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="item">
+          <img src="images/g2.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="item">
+          <img src="images/g3.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="item">
+          <img src="images/g4.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="item">
+          <img src="images/g5.jpg" alt="" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="commissions">
+    <div class="container">
+      <div class="section-label">Commissions</div>
+      <h2>Trusted <em>by.</em></h2>
+      <div class="commissions-list">
+        <span>Out of The</span><span class="sep">/</span>
+        <span>Cass Cafe</span><span class="sep">/</span>
+        <span>Aemilou × Out of The</span><span class="sep">/</span>
+        <span>Slow Tide</span><span class="sep">/</span>
+        <span>Ciao Tote</span><span class="sep">/</span>
+        <span>V de V</span><span class="sep">/</span>
+        <span>Corsé Magazine</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-label">Contact</div>
+    <h2>Let's make <em>something.</em></h2>
+    <a href="mailto:cthecross@hotmail.ca">cthecross@hotmail.ca</a>
+    <div class="socials">
+      <a href="https://www.instagram.com/cassandra.lacroix/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Cassandra Lacroix · Montréal, QC
+  </footer>
+
+  <!-- Category Gallery Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Category</div>
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    </div>
+    <div class="modal-grid" id="modal-grid"></div>
+  </div>
+
+  <!-- Single-image full-screen viewer -->
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true">
+    <img id="viewer-img" src="" alt="" />
+  </div>
+
+  <script>
+    const galleries = {
+      travel:    { title: 'Travel',    count: 12 },
+      music:     { title: 'Music',     count: 12 },
+      portraits: { title: 'Portraits', count: 12 },
+      brands:    { title: 'Brands',    count: 18 },
+    };
+
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalGrid = document.getElementById('modal-grid');
+    const modalClose = document.getElementById('modal-close');
+    const viewer = document.getElementById('viewer');
+    const viewerImg = document.getElementById('viewer-img');
+
+    function openCategory(cat) {
+      const g = galleries[cat];
+      if (!g) return;
+      modalTitle.textContent = g.title;
+      modalGrid.innerHTML = '';
+      for (let i = 1; i <= g.count; i++) {
+        const num = String(i).padStart(2, '0');
+        const src = `images/${cat}/${num}.jpg`;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${g.title} ${i}`;
+        img.loading = 'lazy';
+        img.addEventListener('click', () => openViewer(src));
+        modalGrid.appendChild(img);
+      }
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function openViewer(src) {
+      viewerImg.src = src;
+      viewer.classList.add('open');
+    }
+
+    function closeViewer() {
+      viewer.classList.remove('open');
+      viewerImg.src = '';
+    }
+
+    document.querySelectorAll('.category').forEach(el => {
+      el.addEventListener('click', () => openCategory(el.dataset.category));
+    });
+    modalClose.addEventListener('click', closeModal);
+    viewer.addEventListener('click', closeViewer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (viewer.classList.contains('open')) closeViewer();
+        else if (modal.classList.contains('open')) closeModal();
+      }
+    });
+  </script>
+
+</body>
+</html>
