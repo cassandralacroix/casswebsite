@@ -92,6 +92,37 @@
     .lang-toggle button:hover { opacity: 1; }
     .lang-toggle span { color: var(--muted); }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    nav.open .nav-toggle span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    nav.open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+    nav.open .nav-toggle span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
     /* Hero */
     .hero {
       position: relative;
@@ -420,20 +451,73 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      nav ul { gap: 16px; }
-      nav a { font-size: 11px; }
+      nav {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+      }
+      nav .logo { font-size: 18px; }
+      .nav-toggle { display: flex; }
+      nav ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 0 16px;
+        background: rgba(245, 243, 238, 0.98);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+      }
+      nav.open ul {
+        max-height: calc(100vh - 64px);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      nav ul li { width: 100%; text-align: center; }
+      nav a {
+        display: block;
+        font-size: 14px;
+        padding: 14px 20px;
+      }
+      .lang-toggle {
+        justify-content: center;
+        padding: 18px 0 6px;
+        margin-top: 6px;
+        border-top: 1px solid var(--line);
+        font-size: 14px;
+      }
+      .lang-toggle button { padding: 6px 10px; }
       .container, .hero { padding-left: 20px; padding-right: 20px; }
       .hero { padding-top: 100px; }
+      .hero h1 { font-size: clamp(48px, 13vw, 80px); margin-bottom: 24px; }
+      .hero .tagline { font-size: 16px; }
       section { padding: 80px 0; }
+      h2 { font-size: clamp(36px, 9vw, 56px); margin-bottom: 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-text p { font-size: 16px; }
       .categories { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .category .label { font-size: 18px; bottom: 12px; left: 12px; }
       .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .gallery .tall { grid-row: span 1; aspect-ratio: 4/5; }
+      .commissions-list { font-size: clamp(22px, 5vw, 32px); gap: 12px 20px; }
+      .contact { padding: 100px 0; }
+      .contact a { font-size: clamp(24px, 6vw, 36px); }
       .modal-grid { column-count: 2; column-gap: 8px; padding: 16px; }
       .modal-grid img { margin-bottom: 8px; }
       .modal-header { padding: 16px 20px; }
-      .modal-title { font-size: 22px; }
+      .modal-title { font-size: 20px; }
+      .modal-close { width: 44px; height: 44px; }
+      .viewer { padding: 16px; }
+    }
+    @media (max-width: 420px) {
+      .modal-grid { column-count: 1; }
     }
   </style>
 </head>
@@ -441,7 +525,10 @@
 
   <nav>
     <div class="logo">Cassandra Lacroix</div>
-    <ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu" type="button">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-menu">
       <li><a href="#about" data-i18n="nav.about">About</a></li>
       <li><a href="#work" data-i18n="nav.work">Work</a></li>
       <li><a href="#commissions" data-i18n="nav.clients">Clients</a></li>
@@ -721,6 +808,17 @@
 
     document.querySelectorAll('.lang-toggle button').forEach(btn => {
       btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+
+    const navEl = document.querySelector('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    function setNavOpen(open) {
+      navEl.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    navToggle.addEventListener('click', () => setNavOpen(!navEl.classList.contains('open')));
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => setNavOpen(false));
     });
 
     (function initLang() {
