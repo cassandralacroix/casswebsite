@@ -17,7 +17,8 @@
       --bg-alt: #e5d8bc;
       --bg-sage: #5f6d41;
       --bg-sage-deep: #4a5631;
-      --bg-rust: #a84b2e;
+      --bg-rust: #652e14;
+      --bg-rust-deep: #4d2109;
       --cream: #f3e8c9;
       --ink: #2a1f17;
       --ink-soft: #3d2f22;
@@ -386,14 +387,14 @@
     }
     .about-maze {
       position: absolute;
-      top: -8%;
-      left: -10%;
-      width: 120%;
-      height: 120%;
+      top: -15%;
+      left: -15%;
+      width: 130%;
+      height: 130%;
       color: var(--cream);
-      opacity: 0.18;
+      opacity: 0.28;
       z-index: 0;
-      transform: rotate(10deg);
+      transform: rotate(8deg);
       pointer-events: none;
     }
     .about-portrait img { width: 100%; height: 100%; object-fit: cover; }
@@ -537,14 +538,35 @@
       pointer-events: none;
     }
 
-    /* COMMISSIONS · rust block, centered editorial */
+    /* COMMISSIONS · aged book/leather, centered editorial */
     #commissions {
-      background: var(--bg-rust);
+      background:
+        radial-gradient(ellipse at center, rgba(101,46,20,0) 0%, rgba(77,33,9,0.7) 100%),
+        var(--bg-rust);
       padding: 140px 32px;
       position: relative;
       overflow: hidden;
       text-align: center;
       color: var(--cream);
+    }
+    #commissions::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.75 0 0 0 0 0.5 0 0 0 0.2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+    #commissions::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><g fill='none' stroke='%23f3e8c9' stroke-width='1.2' stroke-linecap='round' opacity='0.08'><path d='M-20,60 C 120,45 260,90 400,55 S 680,70 820,55'/><path d='M-20,100 C 100,80 240,135 400,95 S 680,115 820,95'/><path d='M-20,140 C 90,115 230,180 400,135 S 680,155 820,135'/><path d='M-20,180 C 80,145 220,220 400,170 S 680,195 820,180'/><path d='M-20,220 C 70,180 210,255 400,215 S 680,240 820,225'/><path d='M-20,260 C 80,220 230,290 400,260 S 680,280 820,265'/><path d='M-20,300 C 90,265 240,315 400,300 S 680,315 820,305'/><path d='M-20,340 C 110,310 260,345 400,335 S 680,345 820,340'/><path d='M-20,380 C 130,355 270,375 400,370 S 680,375 820,375'/><path d='M-20,420 C 150,400 280,405 400,400 S 680,405 820,410'/><path d='M-20,460 C 170,445 290,440 400,435 S 680,440 820,445'/></g></svg>");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.9;
     }
     #commissions h2 { color: var(--cream); }
     #commissions h2 .plain { color: var(--cream); }
@@ -552,7 +574,7 @@
       max-width: 820px;
       margin: 0 auto;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
     .comm-sprig {
       display: block;
@@ -906,13 +928,16 @@
               fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
       </symbol>
       <symbol id="maze-swirl" viewBox="0 0 400 400">
-        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M200,200 m-18,0 a18,18 0 1 0 36,0 a18,18 0 1 0 -36,0"/>
-          <path d="M160,200 C 160,180 175,160 200,160 C 230,160 250,185 250,210 C 250,235 230,255 200,255 C 165,255 140,230 140,195 C 140,155 170,125 215,125 C 262,125 295,160 295,210 C 295,262 255,300 200,300 C 140,300 97,258 97,195 C 97,130 145,80 215,80 C 290,80 340,135 340,210 C 340,290 280,350 200,350"/>
-          <path d="M60,210 C 60,120 130,45 215,45 C 310,45 380,120 380,210"/>
-          <path d="M40,230 C 50,340 140,395 210,395 C 300,395 390,335 395,230"/>
-          <path d="M55,160 C 70,110 110,70 160,52"/>
-          <path d="M345,160 C 335,110 300,75 255,55"/>
+        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Hand-drawn topographic contour lines, nested organic shapes -->
+          <path d="M200,200 C 215,195 225,205 220,218 C 212,232 195,228 188,215 C 182,200 195,188 210,188 C 228,188 238,205 232,222"/>
+          <path d="M175,200 C 170,178 190,160 215,160 C 245,162 265,185 260,210 C 254,235 230,250 205,245 C 178,240 162,218 170,195"/>
+          <path d="M150,200 C 140,165 175,135 215,135 C 265,135 295,175 290,215 C 283,255 245,280 205,273 C 158,265 135,225 148,185"/>
+          <path d="M120,205 C 108,155 155,105 215,105 C 285,108 325,160 320,220 C 313,282 258,315 200,308 C 130,298 100,240 118,180"/>
+          <path d="M90,210 C 75,145 140,80 220,80 C 305,82 355,145 350,225 C 343,310 275,355 195,345 C 105,333 68,255 90,180"/>
+          <path d="M55,215 C 45,125 125,50 220,52 C 325,55 390,130 385,230 C 378,335 295,395 195,385 C 80,373 38,280 60,175"/>
+          <path d="M25,210 C 20,105 115,20 220,22 C 345,25 405,115 400,230"/>
+          <path d="M398,245 C 388,345 290,405 195,398 C 70,388 10,290 20,175"/>
         </g>
       </symbol>
       <symbol id="sprig-bot" viewBox="0 0 80 40">
