@@ -274,23 +274,21 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-family: var(--serif);
+      gap: 14px;
     }
-    .statement-footer .caps-small {
+    .statement-mark {
+      width: 32px;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+    .statement-coord {
+      font-family: var(--serif);
       font-size: 12px;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       font-weight: 500;
       color: var(--ink);
-    }
-    .statement-footer .for {
-      font-style: italic;
-      font-size: 24px;
-      color: var(--accent);
-      letter-spacing: 0;
-      line-height: 1;
-      font-variation-settings: "SOFT" 100, "WONK" 1;
+      opacity: 0.75;
     }
 
     /* 4-photo mood grid (State of Sage-style) */
@@ -411,6 +409,24 @@
       color: var(--accent-3);
       margin-bottom: 36px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .about-role::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+    .about-sig {
+      display: block;
+      width: 28px;
+      margin: 28px 0 0;
+      color: var(--accent-3);
+      opacity: 0.8;
     }
     .about-text p {
       font-size: 17px;
@@ -578,10 +594,11 @@
     }
     .comm-sprig {
       display: block;
-      margin: 24px auto 32px;
-      width: 90px;
+      margin: 28px auto 36px;
+      width: 48px;
+      height: 48px;
       color: var(--cream);
-      opacity: 0.75;
+      opacity: 0.8;
     }
     .commissions-list {
       display: flex;
@@ -851,8 +868,6 @@
 
       .about-wrap { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; }
       .about-portrait-wrap { max-width: 320px; margin: 0 auto; }
-      .about-bio h2 { text-align: center; }
-      .about-role { text-align: center; }
       .about-text p { font-size: 16px; }
       .about-text p:last-child { font-size: clamp(28px, 8vw, 36px); }
       .about-spiral { width: 80px; top: 20px; right: 16px; }
@@ -875,7 +890,11 @@
 
       #commissions { padding: 90px 24px; }
       .commissions-list { font-size: clamp(20px, 5.5vw, 28px); gap: 10px 16px; }
-      .comm-sprig { width: 70px; margin: 18px auto 24px; }
+      .comm-sprig { width: 40px; height: 40px; margin: 20px auto 28px; }
+      .about-bio h2 { text-align: center; }
+      .about-role { justify-content: center; }
+      .about-role::before { display: none; }
+      .about-sig { margin: 24px auto 0; }
 
       .contact { padding: 100px 24px; min-height: 70vh; }
       .contact a.email { font-size: clamp(26px, 8vw, 40px); }
@@ -940,18 +959,33 @@
           <path d="M398,245 C 388,345 290,405 195,398 C 70,388 10,290 20,175"/>
         </g>
       </symbol>
-      <symbol id="sprig-bot" viewBox="0 0 80 40">
-        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <path d="M6,20 C 20,20 30,20 40,20 C 50,20 60,20 74,20"/>
-          <path d="M40,20 C 40,14 42,10 46,8"/>
-          <ellipse cx="46" cy="8" rx="3.5" ry="2" transform="rotate(-25 46 8)" fill="currentColor" stroke="none"/>
-          <path d="M40,20 C 40,14 38,10 34,8"/>
-          <ellipse cx="34" cy="8" rx="3.5" ry="2" transform="rotate(25 34 8)" fill="currentColor" stroke="none"/>
-          <path d="M28,20 C 26,24 24,26 22,28"/>
-          <ellipse cx="22" cy="28" rx="3" ry="1.8" transform="rotate(30 22 28)" fill="currentColor" stroke="none"/>
-          <path d="M52,20 C 54,24 56,26 58,28"/>
-          <ellipse cx="58" cy="28" rx="3" ry="1.8" transform="rotate(-30 58 28)" fill="currentColor" stroke="none"/>
-          <circle cx="40" cy="20" r="1.8" fill="currentColor" stroke="none"/>
+      <symbol id="aperture" viewBox="0 0 80 80">
+        <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Outer ring, slightly irregular -->
+          <path d="M40,8 C 60,10 72,24 72,42 C 71,61 56,73 38,72 C 20,71 8,56 9,38 C 10,21 23,8 40,8 Z"/>
+          <!-- Six aperture blades forming an organic hexagon -->
+          <path d="M40,22 L 56,32 L 54,52 L 38,60 L 22,51 L 24,30 Z"/>
+          <!-- Blade pivot marks -->
+          <path d="M40,22 L 40,16"/>
+          <path d="M56,32 L 63,27"/>
+          <path d="M54,52 L 62,58"/>
+          <path d="M38,60 L 38,68"/>
+          <path d="M22,51 L 14,56"/>
+          <path d="M24,30 L 17,25"/>
+        </g>
+      </symbol>
+      <symbol id="lacroix-mark" viewBox="0 0 60 60">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <!-- Cross with small flares at each tip, hand-drawn feel -->
+          <path d="M30,10 L 30,50"/>
+          <path d="M10,30 L 50,30"/>
+          <!-- Flares/serifs -->
+          <path d="M26,10 L 34,10"/>
+          <path d="M26,50 L 34,50"/>
+          <path d="M10,26 L 10,34"/>
+          <path d="M50,26 L 50,34"/>
+          <!-- Center dot -->
+          <circle cx="30" cy="30" r="1.8" fill="currentColor" stroke="none"/>
         </g>
       </symbol>
       <symbol id="blob-daisy" viewBox="0 0 100 100">
@@ -1004,9 +1038,8 @@
     <div class="statement-inner">
       <p class="statement-text" data-i18n-html="statement.text">Music, portrait, travel and lifestyle. <span class="caps">fifteen years</span> of chasing light, finding faces, following stories.</p>
       <div class="statement-footer">
-        <span class="caps-small" data-i18n="statement.foot1">Photographs</span>
-        <span class="for" data-i18n="statement.for">for</span>
-        <span class="caps-small" data-i18n="statement.foot2">The stories that last</span>
+        <svg class="statement-mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#lacroix-mark"/></svg>
+        <span class="statement-coord" data-i18n="statement.coord">Since 2010 · Montréal, QC</span>
       </div>
     </div>
   </section>
@@ -1031,7 +1064,8 @@
       </div>
       <div class="about-bio">
         <h2 data-i18n="about.name">Cassandra Lacroix</h2>
-        <div class="about-role" data-i18n="about.role">Photographer · Montréal</div>
+        <div class="about-role"><span data-i18n="about.role">Photographer · Montréal</span></div>
+        <svg class="about-sig" viewBox="0 0 60 60" aria-hidden="true"><use href="#lacroix-mark"/></svg>
         <div class="about-text">
           <p data-i18n="about.p1">Born in the eastern townships of Quebec, I now call Montreal home. For over 15 years, I've been shooting music, portraits, landscapes, and lifestyle work. Rather than boxing myself into a single niche, I've built a practice that thrives on range.</p>
           <p data-i18n="about.p2">I'm drawn to photography because I see beauty everywhere. Whether I'm working a show, documenting a trip, or capturing the authenticity of a person, I bring the same energy and eye to every frame.</p>
@@ -1073,7 +1107,7 @@
   <section id="commissions">
     <div class="comm-wrap">
       <h2 data-i18n-html="comm.h2"><span class="plain">Trusted</span> by.</h2>
-      <svg class="comm-sprig" viewBox="0 0 80 40" aria-hidden="true"><use href="#sprig-bot"/></svg>
+      <svg class="comm-sprig" viewBox="0 0 80 80" aria-hidden="true"><use href="#aperture"/></svg>
       <div class="commissions-list">
         <span>Out of The</span><span class="sep">◦</span>
         <span>Cass Cafe</span><span class="sep">◦</span>
@@ -1132,9 +1166,7 @@
         'hero.eyebrow': 'a fifteen-year study of light.',
         'hero.title': '<span class="plain">Finding beauty</span>in everything.',
         'statement.text': 'Music, portrait, travel and lifestyle. <span class="caps">Fifteen years</span> of chasing light, finding faces, following stories.',
-        'statement.foot1': 'Photographs',
-        'statement.for': 'for',
-        'statement.foot2': 'The stories that last',
+        'statement.coord': 'Since 2010 · Montréal, QC',
         'about.name': 'Cassandra Lacroix',
         'about.role': 'Photographer · Montréal',
         'about.p1': "Born in the eastern townships of Quebec, I now call Montreal home. For over 15 years, I've been shooting music, portraits, landscapes, and lifestyle work. Rather than boxing myself into a single niche, I've built a practice that thrives on range.",
@@ -1159,9 +1191,7 @@
         'hero.eyebrow': 'quinze ans à chasser la lumière.',
         'hero.title': '<span class="plain">Trouver la beauté</span>dans tout.',
         'statement.text': 'Musique, portrait, voyage, style de vie. <span class="caps">Quinze ans</span> à chasser la lumière, à chercher les visages, à suivre les histoires.',
-        'statement.foot1': 'Photographies',
-        'statement.for': 'pour',
-        'statement.foot2': 'Les histoires qui restent',
+        'statement.coord': 'Depuis 2010 · Montréal, QC',
         'about.name': 'Cassandra Lacroix',
         'about.role': 'Photographe · Montréal',
         'about.p1': 'Né dans les Cantons-de-l’Est du Québec, j’habite maintenant à Montréal. Depuis plus de 15 ans, je photographie la musique, les portraits, les paysages et le lifestyle. Plutôt que de me limiter à une seule niche, j’ai développé une pratique qui s’épanouit dans la diversité.',
